@@ -367,6 +367,7 @@ def make(id: Literal[
     "Ant-v2", "Ant-v3", "Ant-v4",
     "HumanoidStandup-v2", "HumanoidStandup-v4",
     "Humanoid-v2", "Humanoid-v3", "Humanoid-v4",
+    "DiffDrive-v0",
 ], **kwargs) -> Env[np.ndarray, np.ndarray]: ...
 # fmt: on
 
