@@ -3,13 +3,14 @@ import gym
 from gym import error, spaces, utils
 from gym.utils import seeding
 from gym.envs.mujoco import MujocoEnv
+from gym.envs.mujoco import MuJocoPyEnv
 from gym.spaces import Box
 
 import numpy as np
 
 DEFAULT_CAMERA_CONFIG = {}
 
-class DiffDriveEnv(MujocoEnv, utils.EzPickle):
+class DiffDriveEnv(MuJocoPyEnv, utils.EzPickle):
     """
     ### Description
     "DiffDrive is a robot with differential drive. The goal is to move the robot close to the goal
@@ -77,7 +78,7 @@ class DiffDriveEnv(MujocoEnv, utils.EzPickle):
     def __init__(self, **kwargs):
         utils.EzPickle.__init__(self, **kwargs)
         observation_space = Box(low=-np.inf, high=np.inf, shape=(10,), dtype=np.float64)
-        MujocoEnv.__init__(self, "diffdrive.xml", 4, observation_space=observation_space, **kwargs)
+        MuJocoPyEnv.__init__(self, "diffdrive.xml", 4, observation_space=observation_space, **kwargs)
 
     def step(self, action):
         vec = self.get_body_com("fingertip") - self.get_body_com("target")
