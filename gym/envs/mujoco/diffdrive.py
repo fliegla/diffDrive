@@ -10,7 +10,7 @@ import numpy as np
 
 DEFAULT_CAMERA_CONFIG = {}
 
-class DiffDriveEnv(MuJocoPyEnv, utils.EzPickle):
+class DiffDriveEnv(MujocoEnv, utils.EzPickle):
     """
     ### Description
     "DiffDrive is a robot with differential drive. The goal is to move the robot close to the goal
@@ -78,15 +78,15 @@ class DiffDriveEnv(MuJocoPyEnv, utils.EzPickle):
     def __init__(self, **kwargs):
         utils.EzPickle.__init__(self, **kwargs)
         observation_space = Box(low=-np.inf, high=np.inf, shape=(10,), dtype=np.float64)
-        MuJocoPyEnv.__init__(self, "diffdrive.xml", 4, observation_space=observation_space, **kwargs)
+        MujocoEnv.__init__(self, "diffdrive.xml", 4, observation_space=observation_space, **kwargs)
 
     def step(self, action):
         vec = self.get_body_com("fingertip") - self.get_body_com("target")
         reward_dist = -np.linalg.norm(vec)
-        reward_ctrl = -np.square(a).sum()
+        reward_ctrl = -np.square(action).sum()
         reward = reward_dist + reward_ctrl
 
-        self.do_simulation(a, self.frame_skip)
+        self.do_simulation(action, self.frame_skip)
         if self.render_mode == "human":
             self.render()
 
