@@ -81,7 +81,7 @@ class DiffDriveEnv(MujocoEnv, utils.EzPickle):
         MujocoEnv.__init__(self, "diffdrive.xml", 4, observation_space=observation_space, **kwargs)
 
     def step(self, action):
-        vec = self.get_body_com("fingertip") - self.get_body_com("target")
+        vec = self.get_body_com("chassis") - self.get_body_com("goal")
         reward_dist = -np.linalg.norm(vec)
         reward_ctrl = -np.square(action).sum()
         reward = reward_dist + reward_ctrl
