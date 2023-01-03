@@ -20,7 +20,6 @@
     <!--goal line/box-->
     <body name="goal" pos="24.5 0 .3">
       <geom type="box" size=".5 .5 .5" rgba=".9 0 0 1"/>
-      <joint name="goal" type="free"/>
     </body>
     <!--walls-->
     <body name="wall">
